@@ -94,7 +94,7 @@ function buildMetadata(sample) {
   };
 
   function init() {
-    // Grab a reference to the dropdown select element
+    // Selects and referecnes dataset
     let dropdown = d3.select('#selDataset');
     // Use the list of sample names to populate the select options
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
@@ -109,10 +109,10 @@ function buildMetadata(sample) {
     })};
 
   function optionChanged(newSample) {
-    // Fetch new data each time a new sample is selected
+    // Selects new data sample
     buildMetadata(newSample);
     buildCharts(newSample);
   };
   
-  // Initialize the dashboard
+  // Initializes das dashboard
   init();
