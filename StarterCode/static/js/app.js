@@ -1,21 +1,21 @@
 function buildMetadata(sample) {
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
       let metadata = data.metadata;
-      // Filter the data for the object with the desired sample number
+      // Filtering dta
       sample_obj = metadata.filter(sampleNumber => sampleNumber.id == sample)[0];
       
-      // Use d3 to select the panel with id of `#sample-metadata`
+  
       let panel = d3.select('#sample-metadata')
   
-      // Use `.html("") to clear any existing metadata -- so it doesn't keep adding on 
+      // This clears existing metadata with `
       panel.html('')
   
-      // Hint: Inside the loop, you will need to use d3 to append new
-      // tags for each key-value in the metadata.
+      
+      // This tags each key-value in data.
       for (i in sample_obj) {
         panel.append('h6').text(`${i}: ${sample_obj[i]}`);
       }
-      // BONUS: Build the Gauge Chart
+      // BONUS: Guage Chart
       let gaugey = {
         type: 'indicator',
         mode: 'gauge+number',
@@ -55,11 +55,11 @@ function buildMetadata(sample) {
   function buildCharts(sample) {
     d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
   
-      // Build a Bubble Chart
+      // Bubble chart with key-value filter
       let bubbleData = {
-      //key value pairs..samples filter to one of the ids which have the 0 index which we can then grab the .otu ids (cause again dictionary)
+      
         x: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].otu_ids,
-      //grabs the otu_label
+      
         y: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].sample_values,
         text: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].otu_labels,
         mode: 'markers',
@@ -77,9 +77,10 @@ function buildMetadata(sample) {
         }}
       };
   
-      Plotly.newPlot("bubble", [bubbleData], bubbleLayout,{responsive:true});
-      let barData = {
-        //key value pairs..samples filter to one of the ids which have the 0 index which we can then grab the .otu ids (cause again dictionary)
+      Plotly.newPlot('bubble', [bubbleData], bubbleLayout,{responsive:true});
+    let barData = {
+
+        
           x: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].sample_values.slice(0,10).reverse(),
           y: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].otu_ids.slice(0,10).map(otu => `OTU ${otu}`).reverse(),
           text: data.samples.filter(sampleNumber => sampleNumber.id == sample)[0].otu_labels.slice(0,10).reverse(),
@@ -87,7 +88,7 @@ function buildMetadata(sample) {
           orientation: 'h'
         };
         
-        Plotly.newPlot("bar", [barData],{responsive:true});
+        Plotly.newPlot('bar', [barData],{responsive:true});
 
     });
   };
@@ -100,7 +101,7 @@ function buildMetadata(sample) {
       let sampleNames = data.names;
       
       for (let i = 0; i < sampleNames.length; i++) {
-        //append the option tag's value (hence property) to whatever samplename we're currently on .text which number it is
+        //appending tag value
         dropdown.append('option').property('value', sampleNames[i]).text(sampleNames[i]);
       };
     buildMetadata(sampleNames[0]);
